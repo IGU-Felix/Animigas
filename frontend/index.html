@@ -79,7 +79,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
-                <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">      <!-- Requisição imagem -->
+                <div class="hero__items set-bg" data-setbg="">      <!-- Requisição imagem -->
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
@@ -91,11 +91,8 @@
                         </div>
                     </div>
                 </div>
-               
         </div>
     </section>
-    
-    
     <!-- Hero Section End -->
 
     <!-- Product Section Begin -->
@@ -717,7 +714,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
     // IDs dos animes que serão buscados na API Jikan
-    var animeIds = [1, 55791, 72]; // Exemplo de IDs de animes
+    var animeIds = [52991, 55791, 9260]; // Exemplo de IDs de animes
     var apiUrl = 'https://api.jikan.moe/v4/anime/';
 
     // Função para buscar dados de um anime específico pelo ID
@@ -769,7 +766,7 @@
             items: 1,
             loop: true,
             autoplay: true,
-            autoplayTimeout: 5000,
+            autoplayTimeout: 3500,
             autoplayHoverPause: true,
             nav: true,
             dots: false,
