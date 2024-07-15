@@ -440,7 +440,10 @@ ol {
 .hero__items {
 	padding: 250px 0 42px 50px;
 	border-radius: 5px;
-	filter: brightness(0.5);	
+	filter: brightness(0.5);
+	background-repeat: no-repeat;
+	background-size: 1200px;
+	background-position: auto;
 }
 .hero__text {
 	position: relative;

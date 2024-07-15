@@ -1,0 +1,173 @@
+<div class="container">
+<div class="hero__slider owl-carousel">
+    <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">      <!-- Requisição imagem -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="hero__text">
+                    <div class="label">req</div>
+                    <h2>req</h2>
+                    <p>req</p>
+                    <a href=""><span>Ver Reviews</span> <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero__items set-bg" data-setbg="img/hero/hero-2.jpg">    <!-- Requisição imagem -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="hero__text">
+                    <div class="label">req</div>
+                    <h2>req</h2>
+                    <p>req</p>
+                    <a href="#"><span>Ver Reviews</span> <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero__items set-bg" data-setbg="img/hero/hero-3.jpg">   <!-- Requisição imagem -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="hero__text">
+                    <div class="label">req</div>
+                    <h2>req</h2>
+                    <p>req</p>
+                    <a href="#"><span>Ver Reviews</span> <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="container">
+    <div class="hero__slider owl-carousel">
+        <!-- Slides serão preenchidos dinamicamente com JavaScript -->
+    </div>
+</div>
+
+<!-- Incluir jQuery (necessário para o Owl Carousel) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Incluir Owl Carousel JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // Fazer requisição para a API Jikan
+        $.ajax({
+            url: 'https://api.jikan.moe/v4/random/anime',
+            type: 'GET',
+            success: function(data) {
+                // Processar os dados retornados
+                var anime = data.data; // Supondo que a estrutura do retorno seja { "data": { ... } }
+                var heroItems = $('.hero__slider');
+                
+                // Montar os slides do carrossel
+                for (var i = 0; i < 3; i++) { // Criaremos 3 slides no exemplo
+                    var imgUrl = anime.image_url || 'img/hero/hero-' + (i + 1) + '.jpg'; // URL da imagem do anime ou imagem padrão
+                    var genre = anime.genres.length > 0 ? anime.genres[0].name : 'Desconhecido'; // Primeiro gênero ou 'Desconhecido'
+                    var description = anime.synopsis || 'Descrição não disponível'; // Descrição do anime ou texto padrão
+
+                    var slide = $('<div>').addClass('hero__items set-bg').attr('data-setbg', imgUrl);
+                    var row = $('<div>').addClass('row');
+                    var col = $('<div>').addClass('col-lg-6');
+                    var heroText = $('<div>').addClass('hero__text');
+                    
+                    heroText.append($('<div>').addClass('label').text(genre));
+                    heroText.append($('<h2>').text(anime.title));
+                    heroText.append($('<p>').text(description));
+                    heroText.append($('<a>').attr('href', '#').html('<span>Ver Reviews</span> <i class="fa fa-angle-right"></i>'));
+
+                    col.append(heroText);
+                    row.append(col);
+                    slide.append(row);
+                    heroItems.append(slide);
+                }
+
+                // Iniciar o Owl Carousel
+                $('.hero__slider').owlCarousel({
+                    items: 3,
+                    loop: true,
+                    autoplay: true,
+                    autoplayTimeout: 5000,
+                    autoplayHoverPause: true,
+                    nav: true,
+                    dots: false,
+                    navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+                });
+            },
+            error: function(err) {
+                console.error('Erro ao carregar anime aleatório', err);
+            }
+        });
+    });
+</script>
+
+<script>
+    // IDs dos animes que serão buscados na API Jikan
+    var animeIds = [1, 55791, 72]; // Exemplo de IDs de animes
+    var apiUrl = 'https://api.jikan.moe/v4/anime/';
+
+    // Função para buscar dados de um anime específico pelo ID
+    function fetchAnimeData(animeId) {
+        return new Promise(function(resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', apiUrl + animeId);
+            xhr.responseType = 'json';
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    resolve(xhr.response.data);
+                } else {
+                    reject(Error('Erro ao carregar dados do anime'));
+                }
+            };
+            xhr.onerror = function() {
+                reject(Error('Erro de rede ao tentar carregar dados do anime'));
+            };
+            xhr.send();
+        });
+    }
+
+    // Promessas para buscar os dados de todos os animes
+    var requests = animeIds.map(function(animeId) {
+        return fetchAnimeData(animeId);
+    });
+
+    // Executar todas as promessas
+    Promise.all(requests).then(function(animes) {
+        console.log(animes)
+        // Processar os resultados
+        animes.forEach(function(anime, index) {
+            var slide = document.querySelectorAll('.hero__items')[index];
+            var label = slide.querySelector('.label');
+            var h2 = slide.querySelector('h2');
+            var p = slide.querySelector('p');
+            var a = slide.querySelector('a');
+
+            label.textContent = anime.genres.length > 0 ? anime.genres[0].name : 'Desconhecido';
+            h2.textContent = anime.title;
+            p.textContent = anime.synopsis || 'Descrição não disponível';
+            a.href = anime.url; // Supondo que a API retorne a URL para reviews
+            console.log(anime)
+            slide.style.backgroundImage = 'url(' + anime.images.jpg.large_image_url + ')';
+        });
+
+        // Inicializar o Owl Carousel após preencher os slides
+        $('.hero__slider').owlCarousel({
+            items: 1,
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+        });
+
+    }).catch(function(error) {
+        console.error('Erro ao carregar dados dos animes:', error);
+    });
+</script>
