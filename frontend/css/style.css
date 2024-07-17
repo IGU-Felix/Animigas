@@ -440,10 +440,11 @@ ol {
 .hero__items {
 	padding: 250px 0 42px 50px;
 	border-radius: 5px;
-	filter: brightness(0.5);
 	background-repeat: no-repeat;
 	background-size: 1200px;
-	background-position: auto;
+	position: relative;
+    background-size: cover;
+    background-position: center;
 }
 .hero__text {
 	position: relative;
@@ -463,6 +464,21 @@ ol {
 	-webkit-transition: all, 0.2s;
 	-o-transition: all, 0.2s;
 	transition: all, 0.2s;
+}
+
+.dark-overlay {
+    position: relative;
+    overflow: hidden;
+}
+
+.dark-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor escura com transparência */
 }
 
 .hero__text h2 {
@@ -651,10 +667,14 @@ ol {
 }
 
 .product__item__pic {
-	height: 325px;
 	position: relative;
 	border-radius: 5px;
+	min-width: 230px; /* Tamanho do contêiner */
+	height: 350px; /* Altura fixa para as imagens de fundo */
+	background-position: center; /* Centraliza a imagem no contêiner */
+	margin: 5px;
 }
+
 
 .product__item__pic .ep {
 	font-size: 13px;
