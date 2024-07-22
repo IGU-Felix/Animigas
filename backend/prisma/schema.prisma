@@ -13,14 +13,19 @@ model Signup {
   email        String @unique
   passwordHash String @map("password_hash")
   adm          Boolean
+  imagem       String?
+  Comment      Comment[]
   
   @@map("signup")
 }
 
 model Comment {
-  commentId    Int    @id @default(autoincrement())
-  content      String @db.VarChar(255)
-  date         DateTime
+  commentId    Int        @id @default(autoincrement())
+  content      String     @db.VarChar(255)
+  date         DateTime   @default(now())
+  animeId      String?
+  userId       Int        @map("user_id")
+  idUser       Signup     @relation(fields: [userId], references: [id])
 
   @@map("comment")
 }
