@@ -7,7 +7,7 @@
     <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime | Template</title>
+    <title>Anims | Anime</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -47,13 +47,7 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li><a href="./index.html">Página Inicial</a></li>
-                                <li class="active"><a href="./categories.html">Categorias <span
-                                            class="arrow_carrot-down"></span></a>
-                                    <ul class="dropdown">
-                                        <li><a href="./categories.html">Categorias</a></li>
-                                        <li><a href="./blog-details.html">Detalhes do Blog</a></li>
-                                    </ul>
-                                </li>
+                                <li class="active"><a href="./categories.html">Categorias</a></li>
                                 <li><a href="./blog.html">Nosso Blog</a></li>
                             </ul>
                         </nav>
@@ -332,7 +326,7 @@
                 animePic.style.backgroundImage = 'url(' + anime.images.webp.large_image_url + ')';
 
                 var animeEps = animeItem.querySelector('.ep');
-                animeEps.innerHTML = anime.episodes > 0 ? `<span>Episodios:</span> ${anime.episodes}` : "?"
+                animeEps.innerHTML = anime.episodes > 0 ? `<span>Episodios:</span> ${anime.episodes}` : `<span>Episodios:</span> ?`
 
                 var animeTitle = animeItem.querySelector('.titulo')
                 animeTitle.textContent = anime.title
@@ -393,8 +387,6 @@
         }).catch(function (error) {
             console.error('Erro ao carregar dados dos animes:', error);
         });
-
-
     </script>
 
 </body>
