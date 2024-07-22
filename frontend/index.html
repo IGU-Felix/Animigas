@@ -352,44 +352,57 @@
                     <div class="product__sidebar">
                         <div class="product__sidebar__view">
                             <div class="section-title">
-                                <h5>Mais Vistos</h5>
+                                <h5>Lançamento</h5>
                             </div>
                             <ul class="filter__controls">
-                                <li class="active" data-filter="*">Dia</li>
-                                <li data-filter=".week">Semana</li>
-                                <li data-filter=".month">Mês</li>
-                                <li data-filter=".years">Ano</li>
+                                <li class="active" data-filter="Suday">D</li>
+                                <li data-filter=".Monday">S</li>
+                                <li data-filter=".Tuesday">T</li>
+                                <li data-filter=".Wednesday">Q</li>
+                                <li data-filter=".Thrusday">Q</li>
+                                <li data-filter=".Friday">S</li>
+                                <li data-filter=".Saturday">S</li>
                             </ul>
                             <div class="filter__gallery">
-                                <div class="product__sidebar__view__item set-bg mix day years"
-                                    data-setbg="img/sidebar/tv-1.jpg">
-                                    <div class="ep">27 / 28</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Frieren e a Jornada para o Além</a></h5>
+                                <div class="product__sidebar__item">
+                                    <div class="product__sidebar__view__item set-bg dark-overlay"
+                                        data-setbg="">
+                                        <div class="ep"></div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                        <h5><a class="anime-title" href="#" "></a></h5>
+                                    </div>
                                 </div>
-                                <div class="product__sidebar__view__item set-bg mix month week"
-                                    data-setbg="img/sidebar/tv-2.jpg">
-                                    <div class="ep">11 / 12</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Spy x Family Season 2</a></h5>
+                                <div class="product__sidebar__item">
+                                    <div class="product__sidebar__view__item set-bg dark-overlay"
+                                        data-setbg="">
+                                        <div class="ep"></div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                        <h5><a class="anime-title" href="#" "></a></h5>
+                                    </div>
                                 </div>
-                                <div class="product__sidebar__view__item set-bg mix week years"
-                                    data-setbg="img/sidebar/tv-3.jpg">
-                                    <div class="ep">11 / 12</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Tate no Yuusha no Nariagari Season 3</a></h5>
+                                <div class="product__sidebar__item">
+                                    <div class="product__sidebar__view__item set-bg dark-overlay"
+                                        data-setbg="">
+                                        <div class="ep"></div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                        <h5><a class="anime-title" href="#" "></a></h5>
+                                    </div>
                                 </div>
-                                <div class="product__sidebar__view__item set-bg mix years month"
-                                    data-setbg="img/sidebar/tv-4.jpg">
-                                    <div class="ep">11 / 13</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">The Eminence in Shadow Season 2</a></h5>
+                                <div class="product__sidebar__item">
+                                    <div class="product__sidebar__view__item set-bg dark-overlay"
+                                        data-setbg="">
+                                        <div class="ep"></div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                        <h5><a class="anime-title" href="#" "></a></h5>
+                                    </div>
                                 </div>
-                                <div class="product__sidebar__view__item set-bg mix day"
-                                    data-setbg="img/sidebar/tv-5.jpg">
-                                    <div class="ep">11 / 13</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Goblin Slayer II</a></h5>
+                                <div class="product__sidebar__item">
+                                    <div class="product__sidebar__view__item set-bg dark-overlay"
+                                        data-setbg="">
+                                        <div class="ep"></div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                        <h5><a class="anime-title" href="#" "></a></h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -647,19 +660,16 @@
     </script>
 
     <script>
-
         async function searchTop() {
             var apiUrlTop = 'https://api.jikan.moe/v4/top/anime';
             var Topanimes = await fetch(apiUrlTop)
                 .then(function (response) {
                     return response.json();
                 })
-            console.log(Topanimes)
 
-            Topanimes.data.forEach(function (anime, index) {
+            Topanimes.data.slice(0, 6).forEach(function (anime, index) {
                 // Selecionando o elemento HTML correspondente ao anime
                 var animeItem1 = document.querySelectorAll('.popular__item')[index];
-
                 // Preenchendo os elementos com os dados do anime
                 var animePic = animeItem1.querySelector('.product__item__pic');
                 animePic.style.backgroundImage = 'url(' + anime.images.webp.image_url + ')';
@@ -678,11 +688,41 @@
                 animeTitle.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
             });
         }
-
         searchTop()
 
-
     </script>
+
+<script>
+    async function searchWeek() {
+        var apiUrlWeek = 'https://api.jikan.moe/v4/seasons/now';
+        var Weekanimes = await fetch(apiUrlWeek)
+            .then(function (response) {
+                return response.json();
+            })
+        console.log(Weekanimes)
+
+        Weekanimes.data.slice(0, 5).forEach(function (anime, index) {
+            // Selecionando o elemento HTML correspondente ao anime
+            var animeItem2 = document.querySelectorAll('.product__sidebar__item')[index];
+            animeItem2.classList.add(anime.broadcast.day)
+
+            // Preenchendo os elementos com os dados do anime
+            var animePic1 = animeItem2.querySelector('.product__sidebar__view__item');
+            animePic1.style.backgroundImage = 'url(' + anime.images.jpg.large_image_url + ')';
+
+            var animeEps1 = animeItem2.querySelector('.ep');
+            animeEps1.textContent = anime.episodes > 0 ? 'Eps: ' + anime.episodes : "Eps: ?"
+
+            var animeTitle1 = animeItem2.querySelector('.anime-title');
+            animeTitle1.textContent = anime.title;
+            animeTitle1.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
+        });
+    }
+
+    
+    searchWeek()
+
+</script>
 
 </body>
 
