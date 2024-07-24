@@ -7,7 +7,7 @@
     <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime | Categorias</title>
+    <title>Anime | Todos</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li ><a href="./index.html">Página Inicial</a></li>
-                                <li class="active"><a href="./categories.html">Categorias</a>
+                                <li class="active"><a href="./categories.html">Animes</a>
                                 </li>
                                 <li><a href="./blog.html">Nosso Blog</a></li>
                             </ul>
@@ -73,8 +73,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i>Início</a>
-                        <a href="./categories.html">Categorias</a>
-                        <span>Ação</span>
+                        <span>Todos</span>
                     </div>
                 </div>
             </div>
@@ -92,17 +91,7 @@
                             <div class="row">
                                 <div class="col-lg-8 col-md-8 col-sm-6">
                                     <div class="section-title">
-                                        <h4>Ação</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <div class="product__page__filter">
-                                        <p>Order by:</p>
-                                        <select>
-                                            <option value="">A-Z</option>
-                                            <option value="">1-10</option>
-                                            <option value="">10-50</option>
-                                        </select>
+                                        <h4>Todos</h4>
                                     </div>
                                 </div>
                             </div>
@@ -564,6 +553,42 @@
 <script src="js/jquery.slicknav.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+    async function searchTop() {
+        var apiUrlTop = 'https://api.jikan.moe/v4/anime';
+        var Topanimes = await fetch(apiUrlTop)
+            .then(function (response) {
+                return response.json();
+            })
+
+        Topanimes.data.forEach(function (anime, index) {
+            // Selecionando o elemento HTML correspondente ao anime
+
+            console.log(anime)
+
+            var animeItem1 = document.querySelectorAll('.popular__item')[index];
+            // Preenchendo os elementos com os dados do anime
+            var animePic = animeItem1.querySelector('.product__item__pic');
+            animePic.style.backgroundImage = 'url(' + anime.images.webp.image_url + ')';
+
+            var animeEps = animeItem1.querySelector('.ep');
+            animeEps.textContent = anime.episodes > 0 ? 'Eps: ' + anime.episodes : "Eps: ?"
+
+            var animeStatus = animeItem1.querySelector('.anime-status');
+            animeStatus.textContent = anime.status;
+
+            var animeType = animeItem1.querySelector('.anime-type');
+            animeType.textContent = anime.type;
+
+            var animeTitle = animeItem1.querySelector('.anime-title');
+            animeTitle.textContent = anime.title;
+            animeTitle.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
+        });
+    }
+    searchTop()
+
+</script>
 
 </body>
 
