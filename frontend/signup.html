@@ -23,6 +23,60 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        async function userSignup(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            
+            // Obtendo os valores dos campos do formulário
+            const email = document.getElementById('email').value;
+            const nome = document.getElementById('name').value;
+            const senha = document.getElementById('password').value;
+            
+            // Dados que serão enviados
+            const data = {
+                name: nome,
+                email: email,
+                password_hash: senha,
+                adm: false // Adicione outros campos necessários aqui
+            };
+            
+            try {
+                const response = await fetch('http://localhost:3001/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(`Erro: não foi possível cadastrar o usuário`);
+                    return false;
+                }
+
+                const result = await response.json();
+                alert('Usuário cadastrado com sucesso!');
+                console.log(result);
+                window.open('index.html');
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao cadastrar o usuário');
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -92,17 +146,17 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Cadastrar</h3>
-                        <form action="#">
+                        <form onsubmit="userSignup(event)">
                             <div class="input__item">
-                                <input type="text" placeholder="Email">
+                                <input id="email" type="email" placeholder="Email" required>
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Seu Nome">
+                                <input id="name" type="name" placeholder="Usuário" required>
                                 <span class="icon_profile"></span>
                             </div>
                             <div class="input__item">
-                                <input type="password" placeholder="Senha">
+                                <input id="password" type="password" placeholder="Senha" required>
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Entre Agora</button>
@@ -169,16 +223,6 @@
         </div>
     </div>
     <!-- Search model end -->
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
 
 </body>
 

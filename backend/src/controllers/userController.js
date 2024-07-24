@@ -1,5 +1,13 @@
 import { createUser , findUserByEmail } from "../model/User.js"
 import bcrypt from 'bcrypt'
+import {randomUUID} from "node:crypto"
+
+const addImage = async (buffer) => {
+  let newName = `${randomUUID()}.png`;
+  let tmpImg = await jimp.read(buffer);
+  tmpImg.cover(500, 500).quality(80).write(`./public/media/${newName}`);
+  return newName;
+};
 
 export const cadastro = async (req, res) => {
     try {
@@ -21,8 +29,31 @@ export const cadastro = async (req, res) => {
           email: data.email,
           passwordHash,
           adm: data.adm,
+          imagem: []
         },
       );
+
+      if (req.files) {
+        for (let i = 0; i < req.files.imagem.length; i++) {
+          if (
+            ["image/jpeg", "image/jpg", "image/png"].includes(
+              req.files.imagem[i].mimetype
+            )
+          ) {
+            let url = await addImage(req.files.imagem[i].data);
+            data.signup.push({
+              url,
+              default: false,
+            });
+          }
+        }
+      } else {
+        let url = `${process.env.BASE}/media/default.png`;
+        data.sigup.push({
+          url,
+          default: false,
+        });
+      }
   
       res.status(201).json("Usuário Criado");
     } catch (error) {

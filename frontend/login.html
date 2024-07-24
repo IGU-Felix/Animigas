@@ -23,6 +23,64 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        async function login(event) {
+    
+          event.preventDefault(); // Impede o envio padrão do formulário
+    
+          // Obtendo os valores dos campos do formulário
+          const email = document.getElementById('email').value;
+          const senha = document.getElementById('password').value;
+
+          const data = {
+            email: email,
+            password_hash: senha
+          };
+    
+          try {
+            const response = await fetch('http://localhost:3001/signin', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            });
+    
+            if (!response.ok) {
+              const errorData = await response.json();
+              alert(`Erro: E-mail ou senha incorretos`);
+              return false;
+            }
+    
+            const result = await response.json();
+            console.log(result);
+            if(result.adm == 0){
+              localStorage.setItem('UserId',result.userId);
+              console.log(result.userId);
+              window.open('index.html');
+            }
+            // else if(result.adm == 1){
+            //   window.open('index_admin.html');
+            // }
+          
+          } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao realizar o login');
+          }
+        }
+    
+      </script>
 </head>
 
 <body>
@@ -92,13 +150,13 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Entrar</h3>
-                        <form action="#">
+                        <form onsubmit="login(event)">
                             <div class="input__item">
-                                <input type="text" placeholder="Email">
+                                <input type="text" placeholder="Email" id="email">
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
-                                <input type="password" placeholder="Senha">
+                                <input type="password" placeholder="Senha" id="password">
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Entre Agora</button>
@@ -170,17 +228,6 @@
         </div>
     </div>
     <!-- Search model end -->
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-
 
 </body>
 
