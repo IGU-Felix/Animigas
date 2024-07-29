@@ -269,7 +269,7 @@
 
     <script>
         async function searchTop() {
-            var apiUrlTop = 'https://api.jikan.moe/v4/anime?page=1&limit=24';
+            var apiUrlTop = 'https://api.jikan.moe/v4/seasons/now?page=1&limit=24';
             var response = await fetch(apiUrlTop);
             var data = await response.json();
 
@@ -361,6 +361,8 @@
                 animeListElement.appendChild(animeRow);
             });
         }
+
+        
 
         searchTop();
     </script>
