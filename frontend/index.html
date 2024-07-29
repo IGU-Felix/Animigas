@@ -50,7 +50,6 @@
                                 <li class="active"><a href="./index.html">Página Inicial</a></li>
                                 <li><a href="categories.html">Animes</a>
                                 </li>
-                                <li><a href="blog.html">Nosso blog</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -352,75 +351,9 @@
                     <div class="product__sidebar">
                         <div class="product__sidebar__view">
                             <div class="section-title">
-                                <h5>Lançamento</h5>
+                                <h5>Recomendações</h5>
                             </div>
-                            <ul class="filter__controls">
-                                <li class="active" data-filter="*">D</li>
-                                <li data-filter=".Mondays">S</li>
-                                <li data-filter=".Tuesdays">T</li>
-                                <li data-filter=".Wednesdays">Q</li>
-                                <li data-filter=".Thrusdays">Q</li>
-                                <li data-filter=".Fridays">S</li>
-                                <li data-filter=".Saturdays">S</li>
-                            </ul>
                             <div id="sidebarContainer" class="filter__gallery" >
-                            </div>
-                        </div>
-                        <div class="product__sidebar__comment">
-                            <div class="section-title">
-                                <h5>Novos comentários</h5>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="img/sidebar/comment-1.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>lançamento</li>
-                                        <li>Série</li>
-                                    </ul>
-                                    <h5><a href="#">Jujutsu Kaisen 2nd Season</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="img/sidebar/comment-2.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>lançamento</li>
-                                        <li>Série</li>
-                                    </ul>
-                                    <h5><a href="#">Mushoku Tensei II: Isekai Ittara Honki Dasu</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="img/sidebar/comment-3.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>lançamento</li>
-                                        <li>Série</li>
-                                    </ul>
-                                    <h5><a href="#">Zom 100: Bucket List of the Dead</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="img/sidebar/comment-4.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>lançamento</li>
-                                        <li>Série</li>
-                                    </ul>
-                                    <h5><a href="#">Horimiya: Piece</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -640,7 +573,7 @@
                 var animeStatus = animeItem1.querySelector('.anime-status');
                 animeStatus.textContent = anime.status;
 
-                var animeRank = animeItem1.querySelector('.view')
+                var animeRank1 = animeItem1.querySelector('.view')
                 animeRank.innerHTML = " Rank: " + anime.rank
 
                 var animeRank = animeItem1.querySelector('.comment')
@@ -660,18 +593,16 @@
 
 <script>
     async function searchWeek1() {
-            var apiUrlWeek1 = 'https://api.jikan.moe/v4/random/anime';
-            var randomAnime = await fetch(apiUrlWeek1)
-                .then(function (response) {
-                    return response.json();
-                })
-            
-                    // Promessas para buscar os dados de todos os animes
-            var requests = randomAnime.map(function (animeId) {
-            return fetchAnimeData(animeId);
-             });
-             
-            Promise.all(requests).then(function (animes) {
+        var apiUrlWeek1 = 'https://api.jikan.moe/v4/anime?min_score=8.8';
+        var response = await fetch(apiUrlWeek1);
+        var data = await response.json();
+
+        // Ordenando os animes pelo título em ordem alfabética
+        var sortedAnimes = data.data;
+
+        var animeListElement = document.getElementById('sidebarContainer');
+
+        sortedAnimes.slice(0, 10).forEach(function (anime) {
 
             // Preenchendo os elementos com os dados do anime
             var animePic = document.createElement('div');

@@ -75,7 +75,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i>Início</a>
-                        <span>Todos</span>
+                        <span>Temporada Atual</span>
                     </div>
                 </div>
             </div>
@@ -84,140 +84,46 @@
     <!-- Breadcrumb End -->
 
     <!-- Product Section Begin -->
-    <section class="product-page spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="product__page__content">
-                        <div class="product__page__title">
-                            <div class="row">
-                                <div class="col-lg-8 col-md-8 col-sm-6">
-                                    <div class="section-title">
-                                        <h4>Todos</h4>
-                                    </div>
+<section class="product-page spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="product__page__content">
+                    <div class="product__page__title">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-6">
+                                <div class="section-title">
+                                    <h4>Temporada Atual</h4>
                                 </div>
                             </div>
                         </div>
-                        <div id="animeList" class="anime-list">
-                        </div>
                     </div>
-                    <div class="product__pagination">
-                        <a href="#" class="current-page">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                    <div id="animeList" class="anime-list">
+                        <!-- Produtos serão carregados aqui -->
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="product__sidebar">
-                        <div class="product__sidebar__view">
-                            <div class="section-title">
-                                <h5>Mais Assistidos</h5>
-                            </div>
-                            <ul class="filter__controls">
-                                <li class="active" data-filter="*">Dia</li>
-                                <li data-filter=".week">Semana</li>
-                                <li data-filter=".month">Mês</li>
-                                <li data-filter=".years">Ano</li>
-                            </ul>
-                            <div class="filter__gallery">
-                                <div class="product__sidebar__view__item set-bg mix day years"
-                                    data-setbg="img/sidebar/tv-1.jpg">
-                                    <div class="ep">18 / ?</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                                </div>
-                                <div class="product__sidebar__view__item set-bg mix month week"
-                                    data-setbg="img/sidebar/tv-2.jpg">
-                                    <div class="ep">18 / ?</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                </div>
-                                <div class="product__sidebar__view__item set-bg mix week years"
-                                    data-setbg="img/sidebar/tv-3.jpg">
-                                    <div class="ep">18 / ?</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                                </div>
-                                <div class="product__sidebar__view__item set-bg mix years month"
-                                    data-setbg="img/sidebar/tv-4.jpg">
-                                    <div class="ep">18 / ?</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                                </div>
-                                <div class="product__sidebar__view__item set-bg mix day"
-                                    data-setbg="img/sidebar/tv-5.jpg">
-                                    <div class="ep">18 / ?</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Fate stay night unlimited blade works</a></h5>
-                                </div>
-                            </div>
+                <div class="product__pagination">
+                    <a href="#" id="prevPage" class="pagination-button"><i class="fa fa-angle-left"></i></a>
+                    <div id="pageNumbers" class="pagination-numbers"></div>
+                    <a href="#" id="nextPage" class="pagination-button"><i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="product__sidebar">
+                    <div class="product__sidebar__view">
+                        <div class="section-title">
+                            <h5>Recomendações</h5>
                         </div>
-                        <div class="product__sidebar__comment">
-                            <div class="section-title">
-                                <h5>New Comment</h5>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="img/sidebar/comment-1.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>lançamento</li>
-                                        <li>Série</li>
-                                    </ul>
-                                    <h5><a href="#">Jujutsu Kaisen 2nd Season</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="img/sidebar/comment-2.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>lançamento</li>
-                                        <li>Série</li>
-                                    </ul>
-                                    <h5><a href="#">Mushoku Tensei II: Isekai Ittara Honki Dasu</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="img/sidebar/comment-3.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>lançamento</li>
-                                        <li>Série</li>
-                                    </ul>
-                                    <h5><a href="#">Zom 100: Bucket List of the Dead</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="img/sidebar/comment-4.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>lançamento</li>
-                                        <li>Série</li>
-                                    </ul>
-                                    <h5><a href="#">Horimiya: Piece</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
+                        <div id="sidebarContainer" class="filter__gallery">
+                            <!-- Recomendações serão carregadas aqui -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Product Section End -->
+    </div>
+</section>
+<!-- Product Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer">
@@ -236,8 +142,6 @@
                         <ul>
                             <li class="active"><a href="./index.html">Página inicial</a></li>
                             <li><a href="./categories.html">Categorias</a></li>
-                            <li><a href="./blog.html">Nosso Blog</a></li>
-
                         </ul>
                     </div>
                 </div>
@@ -367,6 +271,202 @@
         searchTop();
     </script>
 
+<script>
+    async function searchWeek1() {
+        var apiUrlWeek1 = 'https://api.jikan.moe/v4/anime?min_score=8.8';
+        var response = await fetch(apiUrlWeek1);
+        var data = await response.json();
+
+        // Ordenando os animes pelo título em ordem alfabética
+        var sortedAnimes = data.data;
+
+        var animeListElement = document.getElementById('sidebarContainer');
+
+        sortedAnimes.slice(0, 18).forEach(function (anime) {
+
+            // Preenchendo os elementos com os dados do anime
+            var animePic = document.createElement('div');
+            animePic.classList.add('product__sidebar__view__item', 'set-bg', 'dark-overlay', 'mix' ,`${anime.broadcast.day}`);
+            animePic.style.backgroundImage = 'url(' + anime.images.webp.image_url + ')';
+            animeListElement.appendChild(animePic);
+
+            var epElement = document.createElement('div');
+            epElement.classList.add('ep');
+            epElement.textContent = anime.episodes > 0 ? 'Eps: ' + anime.episodes : 'Eps: ?';
+            animePic.appendChild(epElement);
+
+            var viewElement = document.createElement('div');
+            viewElement.classList.add('view');
+            var viewIcon = document.createElement('i');
+            viewIcon.classList.add('fa', 'fa-star');
+            viewIcon.innerHTML = " " + anime.score
+            viewElement.appendChild(viewIcon);
+            var viewsCount = document.createElement('span');
+            viewsCount.classList.add('views-count');
+            viewElement.appendChild(viewsCount);
+            animePic.appendChild(viewElement);
+
+            var textElement = document.createElement('div');
+            textElement.classList.add('product__item__text');
+            animePic.appendChild(textElement);
+
+            var ulElement = document.createElement('ul');
+            textElement.appendChild(ulElement);
+
+
+            var titleElement = document.createElement('h5');
+            var titleLink = document.createElement('a');
+            titleLink.classList.add('anime-title');
+            titleLink.textContent = anime.title;
+            titleLink.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
+            titleElement.appendChild(titleLink);
+            textElement.appendChild(titleElement);
+
+        });
+    }
+
+    searchWeek1();
+</script>
+
+<script>
+    let currentPage = 1;
+    const perPage = 24;
+    const totalPages = 3; // Defina o número total de páginas conforme necessário
+    const apiBaseUrl = 'https://api.jikan.moe/v4/seasons/now';
+
+    async function fetchAnimes(page) {
+        try {
+            const apiUrl = `${apiBaseUrl}?page=${page}&limit=${perPage}`;
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            return data.data;
+        } catch (error) {
+            console.error('Error fetching animes:', error);
+            return [];
+        }
+    }
+
+    function updatePagination() {
+        const pageNumbersElement = document.getElementById('pageNumbers');
+        pageNumbersElement.innerHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+            const pageNumber = document.createElement('a');
+            pageNumber.href = '#';
+            pageNumber.textContent = i;
+            pageNumber.className = i === currentPage ? 'current-page' : '';
+            pageNumber.addEventListener('click', () => loadPage(i));
+            pageNumbersElement.appendChild(pageNumber);
+        }
+        document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline' : 'none';
+        document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline' : 'none';
+    }
+
+    async function loadPage(page) {
+        if (page < 1 || page > totalPages) return;
+
+        currentPage = page;
+        updatePagination();
+
+        const animes = await fetchAnimes(currentPage);
+        const animeListElement = document.getElementById('animeList');
+        animeListElement.innerHTML = '';
+
+        let row;
+        animes.forEach((anime, index) => {
+            if (index % 3 === 0) {
+                row = document.createElement('div');
+                row.classList.add('row');
+                animeListElement.appendChild(row);
+            }
+
+            const animeDiv = document.createElement('div');
+            animeDiv.classList.add('col-lg-4', 'col-md-6', 'col-sm-6');
+
+            const animeItem = document.createElement('div');
+            animeItem.classList.add('product__item');
+            animeDiv.appendChild(animeItem);
+
+            const animePic = document.createElement('div');
+            animePic.classList.add('product__item__pic', 'set-bg');
+            animePic.style.backgroundImage = `url(${anime.images.webp.image_url})`;
+            animeItem.appendChild(animePic);
+
+            const epElement = document.createElement('div');
+            epElement.classList.add('ep');
+            epElement.textContent = anime.episodes > 0 ? `Eps: ${anime.episodes}` : 'Eps: ?';
+            animePic.appendChild(epElement);
+
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            const commentIcon = document.createElement('i');
+            commentIcon.classList.add('fa', 'fa-comments');
+            commentElement.appendChild(commentIcon);
+            const commentsCount = document.createElement('span');
+            commentsCount.classList.add('comments-count');
+            commentElement.appendChild(commentsCount);
+            animePic.appendChild(commentElement);
+
+            const viewElement = document.createElement('div');
+            viewElement.classList.add('view');
+            const viewIcon = document.createElement('i');
+            viewIcon.classList.add('fa', 'fa-eye');
+            viewElement.appendChild(viewIcon);
+            const viewsCount = document.createElement('span');
+            viewsCount.classList.add('views-count');
+            viewElement.appendChild(viewsCount);
+            animePic.appendChild(viewElement);
+
+            const textElement = document.createElement('div');
+            textElement.classList.add('product__item__text');
+            animeItem.appendChild(textElement);
+
+            const ulElement = document.createElement('ul');
+            textElement.appendChild(ulElement);
+
+            const statusLi = document.createElement('li');
+            statusLi.textContent = 'Status: ';
+            const statusSpan = document.createElement('span');
+            statusSpan.classList.add('anime-status');
+            statusSpan.textContent = anime.status;
+            statusLi.appendChild(statusSpan);
+            ulElement.appendChild(statusLi);
+
+            const typeLi = document.createElement('li');
+            typeLi.textContent = 'Type: ';
+            const typeSpan = document.createElement('span');
+            typeSpan.classList.add('anime-type');
+            typeSpan.textContent = anime.type;
+            typeLi.appendChild(typeSpan);
+            ulElement.appendChild(typeLi);
+
+            const titleElement = document.createElement('h5');
+            const titleLink = document.createElement('a');
+            titleLink.classList.add('anime-title');
+            titleLink.textContent = anime.title;
+            titleLink.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
+            titleElement.appendChild(titleLink);
+            textElement.appendChild(titleElement);
+
+            row.appendChild(animeDiv);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadPage(currentPage);
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) {
+                loadPage(currentPage - 1);
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                loadPage(currentPage + 1);
+            }
+        });
+    });
+</script>
 
 </body>
 
