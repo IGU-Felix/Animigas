@@ -399,7 +399,8 @@
             const commentElement = document.createElement('div');
             commentElement.classList.add('comment');
             const commentIcon = document.createElement('i');
-            commentIcon.classList.add('fa', 'fa-comments');
+            commentIcon.classList.add('fa', 'fa-star');
+            commentIcon.innerHTML = " " + anime.score
             commentElement.appendChild(commentIcon);
             const commentsCount = document.createElement('span');
             commentsCount.classList.add('comments-count');
@@ -409,7 +410,8 @@
             const viewElement = document.createElement('div');
             viewElement.classList.add('view');
             const viewIcon = document.createElement('i');
-            viewIcon.classList.add('fa', 'fa-eye');
+            viewIcon.classList.add('fa');
+            viewIcon.innerHTML = " Rank: " + anime.rank
             viewElement.appendChild(viewIcon);
             const viewsCount = document.createElement('span');
             viewsCount.classList.add('views-count');
