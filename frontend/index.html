@@ -56,10 +56,16 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right">
-                        <a href="login.html"><span class="icon_profile"></span></a>
+                        <div class="dropdown">
+                            <button class="dropbtn"><span class="icon_profile"></span></button>
+                            <div class="dropdown-content">
+                                <a class="login" href="login.html">Entrar</a>
+                                <a href="signup.html">Cadastrar</a>
+                                <a id="logout-link" style="display: none;">Logout</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
             <div id="mobile-menu-wrap"></div>
         </div>
     </header>

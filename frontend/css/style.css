@@ -22,6 +22,41 @@
 /* Template default CSS
 /*----------------------------------------*/
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #ffffff00; /* Altere conforme necessário */
+    border: none;
+    cursor: pointer;
+	color: #fff;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #728fbe;
+}
+
+.dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 6px 8px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+	background-color:rgb(223, 165, 41);
+	display: flex;
+	width: 100%;
+}
+
+.dropdown:hover .dropdown-content {
+    display: inline-block;
+}
+
 html,
 body {
 	height: 100%;
@@ -363,7 +398,7 @@ ol {
 	color: #000000;
 }
 
-.header__menu ul li:hover .dropdown {
+/* .header__menu ul li:hover .dropdown {
 	top: 62px;
 	opacity: 1;
 	visibility: visible;
@@ -403,7 +438,7 @@ ol {
 	color: #111111;
 	font-weight: 500;
 	padding: 5px 20px;
-}
+} */
 
 .header__menu ul li a {
 	font-size: 15px;

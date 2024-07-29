@@ -289,3 +289,42 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+            async function userSignup(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+        
+                // Obtendo os valores dos campos do formulário
+                const email = document.getElementById('email').value;
+                const nome = document.getElementById('name').value;
+                const senha = document.getElementById('password').value;
+        
+                // Dados que serão enviados
+                const data = {
+                    name: nome,
+                    email: email,
+                    password_hash: senha,
+                    adm: false // Adicione outros campos necessários aqui
+                };
+        
+                try {
+                    const response = await fetch('http://localhost:3001/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+                    alert('Usuário cadastrado com sucesso!');
+                    console.log(result);
+                    window.open('index.html');
+                } catch (error) {
+                    console.error('Erro:', error);
+                    alert('Erro ao cadastrar o usuário');
+                }
+            }
