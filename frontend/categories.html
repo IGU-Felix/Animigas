@@ -57,7 +57,6 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
                         <a href="./login.html"><span class="icon_profile"></span></a>
                     </div>
                 </div>
@@ -90,10 +89,17 @@
                     <div class="product__page__content">
                         <div class="product__page__title">
                             <div class="row">
-                                <div class="col-lg-8 col-md-8 col-sm-6">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="section-title">
                                         <h4>Todos</h4>
                                     </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <input type="text" id="search-input" placeholder="Search here..."
+                                        class="form-control" />
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6">
+                                    <button id="search-button" class="btn site-btn-2">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -181,104 +187,6 @@
     <script src="js/main.js"></script>
 
     <script>
-        async function searchTop() {
-            var apiUrlTop = 'https://api.jikan.moe/v4/anime?page=1&limit=24';
-            var response = await fetch(apiUrlTop);
-            var data = await response.json();
-
-            // Ordenando os animes pelo título em ordem alfabética
-            var sortedAnimes = data.data.sort((a, b) => a.title.localeCompare(b.title));
-
-            var animeListElement = document.getElementById('animeList');
-            var animeRow = document.createElement('div')
-            animeRow.classList.add('row')
-
-            sortedAnimes.forEach(function (anime, index) {
-                // Criando um elemento div para cada anime
-                if ((index) % 3 == 0) {
-                    animeRow = document.createElement('div')
-                    animeRow.classList.add('row')
-                }
-
-                var animeDiv = document.createElement('div')
-                animeDiv.classList.add('col-lg-4', 'col-md-6', 'col-sm-6')
-
-                var animeItem = document.createElement('div');
-                animeItem.classList.add('product__item');
-                animeDiv.appendChild(animeItem)
-
-                // Preenchendo os elementos com os dados do anime
-                var animePic = document.createElement('div');
-                animePic.classList.add('product__item__pic', 'set-bg');
-                animePic.style.backgroundImage = 'url(' + anime.images.webp.image_url + ')';
-                animeItem.appendChild(animePic);
-
-                var epElement = document.createElement('div');
-                epElement.classList.add('ep');
-                epElement.textContent = anime.episodes > 0 ? 'Eps: ' + anime.episodes : 'Eps: ?';
-                animePic.appendChild(epElement);
-
-                var commentElement = document.createElement('div');
-                commentElement.classList.add('comment');
-                var commentIcon = document.createElement('i');
-                commentIcon.classList.add('fa', 'fa-comments');
-                commentElement.appendChild(commentIcon);
-                var commentsCount = document.createElement('span');
-                commentsCount.classList.add('comments-count');
-                commentElement.appendChild(commentsCount);
-                animePic.appendChild(commentElement);
-
-                var viewElement = document.createElement('div');
-                viewElement.classList.add('view');
-                var viewIcon = document.createElement('i');
-                viewIcon.classList.add('fa', 'fa-eye');
-                viewElement.appendChild(viewIcon);
-                var viewsCount = document.createElement('span');
-                viewsCount.classList.add('views-count');
-                viewElement.appendChild(viewsCount);
-                animePic.appendChild(viewElement);
-
-                var textElement = document.createElement('div');
-                textElement.classList.add('product__item__text');
-                animeItem.appendChild(textElement);
-
-                var ulElement = document.createElement('ul');
-                textElement.appendChild(ulElement);
-
-                var statusLi = document.createElement('li');
-                statusLi.textContent = 'Status: ';
-                var statusSpan = document.createElement('span');
-                statusSpan.classList.add('anime-status');
-                statusSpan.textContent = anime.status;
-                statusLi.appendChild(statusSpan);
-                ulElement.appendChild(statusLi);
-
-                var typeLi = document.createElement('li');
-                typeLi.textContent = 'Type: ';
-                var typeSpan = document.createElement('span');
-                typeSpan.classList.add('anime-type');
-                typeSpan.textContent = anime.type;
-                typeLi.appendChild(typeSpan);
-                ulElement.appendChild(typeLi);
-
-                var titleElement = document.createElement('h5');
-                var titleLink = document.createElement('a');
-                titleLink.classList.add('anime-title');
-                titleLink.textContent = anime.title;
-                titleLink.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
-                titleElement.appendChild(titleLink);
-                textElement.appendChild(titleElement);
-
-                animeRow.appendChild(animeDiv)
-                // Adicionando o item de anime à lista
-                animeListElement.appendChild(animeRow);
-            });
-        }
-
-        searchTop();
-    </script>
-
-    <script>
         async function searchWeek1() {
             var apiUrlWeek1 = 'https://api.jikan.moe/v4/anime?min_score=8.8';
             var response = await fetch(apiUrlWeek1);
@@ -352,7 +260,6 @@
             }
         }
 
-
         function updatePagination() {
             document.querySelectorAll('.page-number').forEach((el) => {
                 el.classList.toggle('current-page', parseInt(el.textContent) === currentPage);
@@ -368,6 +275,10 @@
             updatePagination();
 
             const animes = await fetchAnimes(currentPage);
+            displayAnimes(animes);
+        }
+
+        function displayAnimes(animes) {
             const animeListElement = document.getElementById('animeList');
             animeListElement.innerHTML = '';
 
@@ -396,17 +307,11 @@
                 epElement.textContent = anime.episodes > 0 ? `Eps: ${anime.episodes}` : 'Eps: ?';
                 animePic.appendChild(epElement);
 
-                // var animeRank1 = animeItem1.querySelector('.view')
-                //     animeRank.innerHTML = " Rank: " + anime.rank
-
-                //     var animeRank = animeItem1.querySelector('.comment')
-                //     animeRank.innerHTML = " " + anime.score
-
                 const commentElement = document.createElement('div');
                 commentElement.classList.add('comment');
                 const commentIcon = document.createElement('i');
                 commentIcon.classList.add('fa', 'fa-star');
-                commentIcon.innerHTML = " " + anime.score
+                commentIcon.innerHTML = " " + anime.score;
                 commentElement.appendChild(commentIcon);
                 const commentsCount = document.createElement('span');
                 commentsCount.classList.add('comments-count');
@@ -417,7 +322,7 @@
                 viewElement.classList.add('view');
                 const viewIcon = document.createElement('i');
                 viewIcon.classList.add('fa');
-                viewIcon.innerHTML = " Rank: " + anime.rank
+                viewIcon.innerHTML = " Rank: " + anime.rank;
                 viewElement.appendChild(viewIcon);
                 const viewsCount = document.createElement('span');
                 viewsCount.classList.add('views-count');
@@ -481,6 +386,30 @@
                 });
             });
         });
+
+    </script>
+
+    <script>
+        async function searchAnime(query) {
+            const apiUrl = `https://api.jikan.moe/v4/anime?q=${query}&limit=24`;
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                return data.data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return [];
+            }
+        }
+
+        document.getElementById('search-button').addEventListener('click', async () => {
+            const query = document.getElementById('search-input').value;
+            if (query) {
+                const animes = await searchAnime(query);
+                displayAnimes(animes);
+            }
+        });
+
     </script>
 
 </body>

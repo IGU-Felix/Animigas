@@ -184,6 +184,19 @@ ol {
 	padding: 12px 30px;
 }
 
+.site-btn-2 {
+	font-size: 13px;
+	color: #ffffff;
+	background: rgb(223, 165, 41);
+	font-weight: 700;
+	border: none;
+	border-radius: 2px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 9px 20px;
+}
+
 /* Preloder */
 
 #preloder {
