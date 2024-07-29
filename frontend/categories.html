@@ -82,49 +82,54 @@
     </div>
     <!-- Breadcrumb End -->
 
-   <!-- Product Section Begin -->
-<section class="product-page spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="product__page__content">
-                    <div class="product__page__title">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-6">
-                                <div class="section-title">
-                                    <h4>Todos</h4>
+    <!-- Product Section Begin -->
+    <section class="product-page spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="product__page__content">
+                        <div class="product__page__title">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-6">
+                                    <div class="section-title">
+                                        <h4>Todos</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="animeList" class="anime-list">
-                    </div>
-                </div>
-                <div class="product__pagination">
-                    <a href="#" id="prevPage"><i class="fa fa-angle-left"></i></a>
-                    <a href="#" id="page1" class="page-number">1</a>
-                    <a href="#" id="page2" class="page-number">2</a>
-                    <a href="#" id="page3" class="page-number">3</a>
-                    <a href="#" id="page4" class="page-number">4</a>
-                    <a href="#" id="page5" class="page-number">5</a>
-                    <a href="#" id="nextPage"><i class="fa fa-angle-right"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-8">
-                <div class="product__sidebar">
-                    <div class="product__sidebar__view">
-                        <div class="section-title">
-                            <h5>Recomendações</h5>
+                        <div id="animeList" class="anime-list">
                         </div>
-                        <div id="sidebarContainer" class="filter__gallery">
+                    </div>
+                    <div class="product__pagination">
+                        <a href="#" id="prevPage"><i class="fa fa-angle-left"></i></a>
+                        <a href="#" id="page1" class="page-number">1</a>
+                        <a href="#" id="page2" class="page-number">2</a>
+                        <a href="#" id="page3" class="page-number">3</a>
+                        <a href="#" id="page4" class="page-number">4</a>
+                        <a href="#" id="page5" class="page-number">5</a>
+                        <a href="#" id="page5" class="page-number">6</a>
+                        <a href="#" id="page5" class="page-number">7</a>
+                        <a href="#" id="page5" class="page-number">8</a>
+                        <a href="#" id="page5" class="page-number">9</a>
+                        <a href="#" id="page5" class="page-number">10</a>
+                        <a href="#" id="nextPage"><i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="product__sidebar">
+                        <div class="product__sidebar__view">
+                            <div class="section-title">
+                                <h5>Recomendações</h5>
+                            </div>
+                            <div id="sidebarContainer" class="filter__gallery">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Product Section End -->
+    </section>
+    <!-- Product Section End -->
 
 
     <!-- Footer Section Begin -->
@@ -273,210 +278,210 @@
         searchTop();
     </script>
 
-<script>
-    async function searchWeek1() {
-        var apiUrlWeek1 = 'https://api.jikan.moe/v4/anime?min_score=8.8';
-        var response = await fetch(apiUrlWeek1);
-        var data = await response.json();
+    <script>
+        async function searchWeek1() {
+            var apiUrlWeek1 = 'https://api.jikan.moe/v4/anime?min_score=8.8';
+            var response = await fetch(apiUrlWeek1);
+            var data = await response.json();
 
-        // Ordenando os animes pelo título em ordem alfabética
-        var sortedAnimes = data.data;
+            // Ordenando os animes pelo título em ordem alfabética
+            var sortedAnimes = data.data;
 
-        var animeListElement = document.getElementById('sidebarContainer');
+            var animeListElement = document.getElementById('sidebarContainer');
 
-        sortedAnimes.slice(0, 18).forEach(function (anime) {
+            sortedAnimes.slice(0, 18).forEach(function (anime) {
 
-            // Preenchendo os elementos com os dados do anime
-            var animePic = document.createElement('div');
-            animePic.classList.add('product__sidebar__view__item', 'set-bg', 'dark-overlay', 'mix' ,`${anime.broadcast.day}`);
-            animePic.style.backgroundImage = 'url(' + anime.images.webp.image_url + ')';
-            animeListElement.appendChild(animePic);
+                // Preenchendo os elementos com os dados do anime
+                var animePic = document.createElement('div');
+                animePic.classList.add('product__sidebar__view__item', 'set-bg', 'dark-overlay', 'mix', `${anime.broadcast.day}`);
+                animePic.style.backgroundImage = 'url(' + anime.images.webp.image_url + ')';
+                animeListElement.appendChild(animePic);
 
-            var epElement = document.createElement('div');
-            epElement.classList.add('ep');
-            epElement.textContent = anime.episodes > 0 ? 'Eps: ' + anime.episodes : 'Eps: ?';
-            animePic.appendChild(epElement);
+                var epElement = document.createElement('div');
+                epElement.classList.add('ep');
+                epElement.textContent = anime.episodes > 0 ? 'Eps: ' + anime.episodes : 'Eps: ?';
+                animePic.appendChild(epElement);
 
-            var viewElement = document.createElement('div');
-            viewElement.classList.add('view');
-            var viewIcon = document.createElement('i');
-            viewIcon.classList.add('fa', 'fa-star');
-            viewIcon.innerHTML = " " + anime.score
-            viewElement.appendChild(viewIcon);
-            var viewsCount = document.createElement('span');
-            viewsCount.classList.add('views-count');
-            viewElement.appendChild(viewsCount);
-            animePic.appendChild(viewElement);
+                var viewElement = document.createElement('div');
+                viewElement.classList.add('view');
+                var viewIcon = document.createElement('i');
+                viewIcon.classList.add('fa', 'fa-star');
+                viewIcon.innerHTML = " " + anime.score
+                viewElement.appendChild(viewIcon);
+                var viewsCount = document.createElement('span');
+                viewsCount.classList.add('views-count');
+                viewElement.appendChild(viewsCount);
+                animePic.appendChild(viewElement);
 
-            var textElement = document.createElement('div');
-            textElement.classList.add('product__item__text');
-            animePic.appendChild(textElement);
+                var textElement = document.createElement('div');
+                textElement.classList.add('product__item__text');
+                animePic.appendChild(textElement);
 
-            var ulElement = document.createElement('ul');
-            textElement.appendChild(ulElement);
+                var ulElement = document.createElement('ul');
+                textElement.appendChild(ulElement);
 
 
-            var titleElement = document.createElement('h5');
-            var titleLink = document.createElement('a');
-            titleLink.classList.add('anime-title');
-            titleLink.textContent = anime.title;
-            titleLink.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
-            titleElement.appendChild(titleLink);
-            textElement.appendChild(titleElement);
+                var titleElement = document.createElement('h5');
+                var titleLink = document.createElement('a');
+                titleLink.classList.add('anime-title');
+                titleLink.textContent = anime.title;
+                titleLink.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
+                titleElement.appendChild(titleLink);
+                textElement.appendChild(titleElement);
 
-        });
-    }
-
-    searchWeek1();
-</script>
-
-<script>
-    let currentPage = 1;
-    const totalPages = 5; // Ajuste conforme necessário
-    const apiBaseUrl = 'https://api.jikan.moe/v4/anime';
-
-    async function fetchAnimes(page) {
-        try {
-            const apiUrl = `${apiBaseUrl}?page=${page}&limit=24`;
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            return data.data;
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            return [];
+            });
         }
-    }
 
-    function updatePagination() {
-        document.querySelectorAll('.page-number').forEach((el) => {
-            el.classList.toggle('current-page', parseInt(el.textContent) === currentPage);
-        });
-        document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline' : 'none';
-        document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline' : 'none';
-    }
+        searchWeek1();
+    </script>
 
-    async function loadPage(page) {
-        if (page < 1 || page > totalPages) return;
+    <script>
+        let currentPage = 1;
+        const totalPages = 10; // Ajuste conforme necessário
+        const apiBaseUrl = 'https://api.jikan.moe/v4/anime';
 
-        currentPage = page;
-        updatePagination();
-
-        const animes = await fetchAnimes(currentPage);
-        const animeListElement = document.getElementById('animeList');
-        animeListElement.innerHTML = '';
-
-        let row;
-        animes.forEach((anime, index) => {
-            if (index % 3 === 0) {
-                row = document.createElement('div');
-                row.classList.add('row');
-                animeListElement.appendChild(row);
+        async function fetchAnimes(page) {
+            try {
+                const apiUrl = `${apiBaseUrl}?page=${page}&limit=24`;
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                return data.data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return [];
             }
+        }
 
-            const animeDiv = document.createElement('div');
-            animeDiv.classList.add('col-lg-4', 'col-md-6', 'col-sm-6');
 
-            const animeItem = document.createElement('div');
-            animeItem.classList.add('product__item');
-            animeDiv.appendChild(animeItem);
+        function updatePagination() {
+            document.querySelectorAll('.page-number').forEach((el) => {
+                el.classList.toggle('current-page', parseInt(el.textContent) === currentPage);
+            });
+            document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline' : 'none';
+            document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline' : 'none';
+        }
 
-            const animePic = document.createElement('div');
-            animePic.classList.add('product__item__pic', 'set-bg');
-            animePic.style.backgroundImage = `url(${anime.images.webp.image_url})`;
-            animeItem.appendChild(animePic);
+        async function loadPage(page) {
+            if (page < 1 || page > totalPages) return;
 
-            const epElement = document.createElement('div');
-            epElement.classList.add('ep');
-            epElement.textContent = anime.episodes > 0 ? `Eps: ${anime.episodes}` : 'Eps: ?';
-            animePic.appendChild(epElement);
+            currentPage = page;
+            updatePagination();
 
-            // var animeRank1 = animeItem1.querySelector('.view')
-            //     animeRank.innerHTML = " Rank: " + anime.rank
+            const animes = await fetchAnimes(currentPage);
+            const animeListElement = document.getElementById('animeList');
+            animeListElement.innerHTML = '';
 
-            //     var animeRank = animeItem1.querySelector('.comment')
-            //     animeRank.innerHTML = " " + anime.score
+            let row;
+            animes.forEach((anime, index) => {
+                if (index % 3 === 0) {
+                    row = document.createElement('div');
+                    row.classList.add('row');
+                    animeListElement.appendChild(row);
+                }
 
-            const commentElement = document.createElement('div');
-            commentElement.classList.add('comment');
-            const commentIcon = document.createElement('i');
-            commentIcon.classList.add('fa', 'fa-star');
-            commentIcon.innerHTML = " " + anime.score
-            commentElement.appendChild(commentIcon);
-            const commentsCount = document.createElement('span');
-            commentsCount.classList.add('comments-count');
-            commentElement.appendChild(commentsCount);
-            animePic.appendChild(commentElement);
+                const animeDiv = document.createElement('div');
+                animeDiv.classList.add('col-lg-4', 'col-md-6', 'col-sm-6');
 
-            const viewElement = document.createElement('div');
-            viewElement.classList.add('view');
-            const viewIcon = document.createElement('i');
-            viewIcon.classList.add('fa');
-            viewIcon.innerHTML = " Rank: " + anime.rank
-            viewElement.appendChild(viewIcon);
-            const viewsCount = document.createElement('span');
-            viewsCount.classList.add('views-count');
-            viewElement.appendChild(viewsCount);
-            animePic.appendChild(viewElement);
+                const animeItem = document.createElement('div');
+                animeItem.classList.add('product__item');
+                animeDiv.appendChild(animeItem);
 
-            const textElement = document.createElement('div');
-            textElement.classList.add('product__item__text');
-            animeItem.appendChild(textElement);
+                const animePic = document.createElement('div');
+                animePic.classList.add('product__item__pic', 'set-bg');
+                animePic.style.backgroundImage = `url(${anime.images.webp.image_url})`;
+                animeItem.appendChild(animePic);
 
-            const ulElement = document.createElement('ul');
-            textElement.appendChild(ulElement);
+                const epElement = document.createElement('div');
+                epElement.classList.add('ep');
+                epElement.textContent = anime.episodes > 0 ? `Eps: ${anime.episodes}` : 'Eps: ?';
+                animePic.appendChild(epElement);
 
-            const statusLi = document.createElement('li');
-            statusLi.textContent = 'Status: ';
-            const statusSpan = document.createElement('span');
-            statusSpan.classList.add('anime-status');
-            statusSpan.textContent = anime.status;
-            statusLi.appendChild(statusSpan);
-            ulElement.appendChild(statusLi);
+                // var animeRank1 = animeItem1.querySelector('.view')
+                //     animeRank.innerHTML = " Rank: " + anime.rank
 
-            const typeLi = document.createElement('li');
-            typeLi.textContent = 'Type: ';
-            const typeSpan = document.createElement('span');
-            typeSpan.classList.add('anime-type');
-            typeSpan.textContent = anime.type;
-            typeLi.appendChild(typeSpan);
-            ulElement.appendChild(typeLi);
+                //     var animeRank = animeItem1.querySelector('.comment')
+                //     animeRank.innerHTML = " " + anime.score
 
-            const titleElement = document.createElement('h5');
-            const titleLink = document.createElement('a');
-            titleLink.classList.add('anime-title');
-            titleLink.textContent = anime.title;
-            titleLink.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
-            titleElement.appendChild(titleLink);
-            textElement.appendChild(titleElement);
+                const commentElement = document.createElement('div');
+                commentElement.classList.add('comment');
+                const commentIcon = document.createElement('i');
+                commentIcon.classList.add('fa', 'fa-star');
+                commentIcon.innerHTML = " " + anime.score
+                commentElement.appendChild(commentIcon);
+                const commentsCount = document.createElement('span');
+                commentsCount.classList.add('comments-count');
+                commentElement.appendChild(commentsCount);
+                animePic.appendChild(commentElement);
 
-            row.appendChild(animeDiv);
-        });
-    }
+                const viewElement = document.createElement('div');
+                viewElement.classList.add('view');
+                const viewIcon = document.createElement('i');
+                viewIcon.classList.add('fa');
+                viewIcon.innerHTML = " Rank: " + anime.rank
+                viewElement.appendChild(viewIcon);
+                const viewsCount = document.createElement('span');
+                viewsCount.classList.add('views-count');
+                viewElement.appendChild(viewsCount);
+                animePic.appendChild(viewElement);
 
-    document.addEventListener('DOMContentLoaded', () => {
-        loadPage(currentPage);
+                const textElement = document.createElement('div');
+                textElement.classList.add('product__item__text');
+                animeItem.appendChild(textElement);
 
-        document.getElementById('prevPage').addEventListener('click', () => {
-            if (currentPage > 1) {
-                loadPage(currentPage - 1);
-            }
-        });
+                const ulElement = document.createElement('ul');
+                textElement.appendChild(ulElement);
 
-        document.getElementById('nextPage').addEventListener('click', () => {
-            if (currentPage < totalPages) {
-                loadPage(currentPage + 1);
-            }
-        });
+                const statusLi = document.createElement('li');
+                statusLi.textContent = 'Status: ';
+                const statusSpan = document.createElement('span');
+                statusSpan.classList.add('anime-status');
+                statusSpan.textContent = anime.status;
+                statusLi.appendChild(statusSpan);
+                ulElement.appendChild(statusLi);
 
-        document.querySelectorAll('.page-number').forEach((pageNumber) => {
-            pageNumber.addEventListener('click', (event) => {
-                const page = parseInt(event.target.textContent);
-                loadPage(page);
+                const typeLi = document.createElement('li');
+                typeLi.textContent = 'Type: ';
+                const typeSpan = document.createElement('span');
+                typeSpan.classList.add('anime-type');
+                typeSpan.textContent = anime.type;
+                typeLi.appendChild(typeSpan);
+                ulElement.appendChild(typeLi);
+
+                const titleElement = document.createElement('h5');
+                const titleLink = document.createElement('a');
+                titleLink.classList.add('anime-title');
+                titleLink.textContent = anime.title;
+                titleLink.setAttribute('href', `anime-details.html?id=${anime.mal_id}`);
+                titleElement.appendChild(titleLink);
+                textElement.appendChild(titleElement);
+
+                row.appendChild(animeDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPage(currentPage);
+
+            document.getElementById('prevPage').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    loadPage(currentPage - 1);
+                }
+            });
+
+            document.getElementById('nextPage').addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    loadPage(currentPage + 1);
+                }
+            });
+
+            document.querySelectorAll('.page-number').forEach((pageNumber) => {
+                pageNumber.addEventListener('click', (event) => {
+                    const page = parseInt(event.target.textContent);
+                    loadPage(page);
+                });
             });
         });
-    });
-</script>
-
+    </script>
 
 </body>
 

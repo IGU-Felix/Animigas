@@ -389,6 +389,96 @@
         });
     </script>
 
+    <script>
+
+        async function postComment(event) {
+
+            // IDs dos animes que serão buscados na API Jikan
+
+            var url = window.location.href;
+
+            // Criar um objeto URLSearchParams com a query string da URL
+
+            var searchParams = new URLSearchParams(new URL(url).search);
+
+            // Obter o valor do parâmetro "id"
+
+            var id = searchParams.get('id');
+
+            var animeid = [id]; // Exemplo de IDs de animes
+
+            const comment = document.getElementById('comment').value
+
+            const userId = localStorage.getItem('UserId')
+
+            const data = {
+
+                content: comment,
+
+                date,
+
+                user_id: userId,
+
+                animeId: animeid
+
+            }
+
+            if (userId !== 0 || null) {
+
+                try {
+
+                    const response = await fetch('http://localhost:3001/comment', {
+
+                        method: 'POST',
+
+                        headers: {
+
+                            'Content-Type': 'application/json'
+
+                        },
+
+                        body: JSON.stringify(data)
+
+                    });
+
+
+                    if (!response.ok) {
+
+                        const errorData = await response.json();
+
+                        alert(`Erro: não foi possível enviar o comentário`);
+
+                        return false;
+
+                    }
+
+                    const result = await response.json();
+
+                    alert('Comentário feito com sucesso!');
+
+                    console.log(result);
+
+                    window.open('index.html');
+
+                } catch (error) {
+
+                    console.error('Erro:', error);
+
+                    alert('Erro ao enviar o comentário');
+
+                }
+
+            } else {
+
+                alert('Por favor faça login antes de comentar! :)')
+
+            }
+
+        }
+
+    </script>
+
+
 </body>
 
 </html>
