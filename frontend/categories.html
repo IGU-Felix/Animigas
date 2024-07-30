@@ -421,7 +421,7 @@
 
 <script>    
     function checkLogin() {
-            const userId = sessionStorage.getItem('UserId');
+            const userId = localStorage.getItem('userId');
             const loginLink = document.querySelector('entrar');
             const signupLink = document.querySelector('signup');
             const logoutLink = document.getElementById('logout-link');
@@ -446,7 +446,7 @@
         document.addEventListener('DOMContentLoaded', checkLogin);
 
         function logout() {
-            sessionStorage.removeItem('UserId');
+            localStorage.removeItem('userId');
             window.location.href = 'index.html';
         }
 

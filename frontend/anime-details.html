@@ -321,7 +321,7 @@
 
     <script>    
         function checkLogin() {
-                const userId = sessionStorage.getItem('UserId');
+                const userId = localStorage.getItem('userId');
                 const loginLink = document.querySelector('entrar');
                 const signupLink = document.querySelector('signup');
                 const logoutLink = document.getElementById('logout-link');
@@ -346,7 +346,7 @@
             document.addEventListener('DOMContentLoaded', checkLogin);
 
             function logout() {
-                sessionStorage.removeItem('UserId');
+                localStorage.removeItem('userId');
                 window.location.href = 'index.html';
             }
 
@@ -361,12 +361,12 @@
             var id = searchParams.get('id');
 
             const comment = document.getElementById('comment').value;
-            const userId = sessionStorage.getItem('UserId');
-            const anime = id; // Usa o ID obtido da URL
+            const userId = localStorage.getItem('userId');
+            const anime = Number(id); // Usa o ID obtido da URL
 
             const data = {
                 content: comment,
-                user: userId, // Certifique-se de que este é o nome correto do campo
+                userId: userId, // Certifique-se de que este é o nome correto do campo
                 animeId: anime
             };
 
