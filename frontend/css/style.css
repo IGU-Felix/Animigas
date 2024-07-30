@@ -1220,10 +1220,10 @@ ol {
 	margin-bottom: 0;
 }
 
-.anime__details__form form textarea {
+.anime__details__form form input {
 	width: 100%;
 	font-size: 15px;
-	color: #b7b7b7;
+	color: #000000;
 	padding-left: 20px;
 	padding-top: 12px;
 	height: 110px;
@@ -1233,7 +1233,7 @@ ol {
 	margin-bottom: 24px;
 }
 
-.anime__details__form form button {
+/* .anime__details__form form button {
 	font-size: 11px;
 	color: #ffffff;
 	font-weight: 700;
@@ -1243,7 +1243,7 @@ ol {
 	border: none;
 	padding: 10px 15px;
 	border-radius: 2px;
-}
+} */
 
 /*---------------------
   Anime Watching

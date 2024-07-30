@@ -153,78 +153,16 @@
                                     a essa obra.</p>
                             </div>
                         </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-2.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>vitordc - <span>13 setembro 2023</span></h6>
-                                <p>Anime fantastico
-                                    O anime retrata uma historia de vingança e investigação muito boa, explicando os
-                                    fatos,
-                                    e os motivos, tem uma linha de tempo fantástica que é possível acompanhar sem se
-                                    perder,
-                                    recomendo muito assistir</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-3.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Magyff - <span>18 junho 2023</span></h6>
-                                <p>Sensacional!
-                                    Que anime incrível, a animação deixa um pouco a desejar, mas a gente acaba se
-                                    acostumando.
-                                    A história é simplesmente envolvente e emocionante.</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-4.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>lhiucas - <span>22 março 2024</span></h6>
-                                <p>O Anime é bom, mas a crunchyroll me deu spoiler
-                                    Pena que ao ver os capitulos ja mostrou o rosto do vilão final na
-                                    tumb.........................................</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-5.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                <p>Finally it came out ages ago</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-6.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>kemy_tomatinho - <span>06 dezembro 2023</span></h6>
-                                <p>Vale a pena assistir
-                                    Apesar de ficar sem entender nada até metade do anime e o maior plot twist ser um
-                                    pouco previsível,
-                                    me deixou muito instigada a assistir o desenrolar de tudo e a entender algumas
-                                    coisas que de início
-                                    não faziam sentido. Tem uns papos bem profundos sobre a mente humana que deixa o
-                                    anime complexo
-                                    mas ao mesmo tempo bem legal. Achei a ideia do anime bem diferente e criativa. Vale
-                                    a pena
-                                    assistir.</p>
-                            </div>
-                        </div>
                     </div>
                     <div class="anime__details__form">
                         <div class="section-title">
                             <h5>Deixe seu comentário!</h5>
                         </div>
                         <form onsubmit="postComment(event)">
-                            <textarea id="comment" placeholder="Comente"></textarea>
-                            <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                            <div>
+                                <input id="comment" placeholder="Comente" required></input>
+                            </div>
+                            <button type="submit" class="site-btn">Review</button>
                         </form>
                     </div>
                 </div>
@@ -249,9 +187,7 @@
                     <div class="footer__nav">
                         <ul>
                             <li class="active"><a href="./index.html">Página Inicial</a></li>
-                            <li><a href="./categories.html">Categorias</a></li>
-                            <li><a href="./blog.html">Nosso Blog</a></li>
-
+                            <li><a href="./categories.html">Animes</a></li>
                         </ul>
                     </div>
                 </div>
@@ -259,17 +195,6 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
-    <!-- Search model Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search model end -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -394,47 +319,6 @@
         });
     </script>
 
-    <script>
-        async function postComment(event) {
-            // IDs dos animes que serão buscados na API Jikan
-            var url = window.location.href;
-            // Criar um objeto URLSearchParams com a query string da URL
-            var searchParams = new URLSearchParams(new URL(url).search);
-            // Obter o valor do parâmetro "id"
-            var id = searchParams.get('id');
-            var animeid = [id]; // Exemplo de IDs de animes
-            const comment = document.getElementById('comment').value
-            const userId = localStorage.getItem('UserId')
-            const data = {
-                content: comment,
-                date,
-                user_id: userId,
-                animeId: animeid
-            }
-            if (userId !== 0 || null) {
-                try {
-                    const response = await fetch('http://localhost:3001/comment', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    });
-
-                    const result = await response.json();
-                    alert('Comentário feito com sucesso!');
-                    console.log(result);
-                    window.open('index.html');
-                } catch (error) {
-                    console.error('Erro:', error);
-                    alert('Erro ao enviar o comentário');
-                }
-            } else {
-                alert('Por favor faça login antes de comentar! :)')
-            }
-        }
-    </script>
-
     <script>    
         function checkLogin() {
                 const userId = sessionStorage.getItem('UserId');
@@ -468,6 +352,46 @@
 
     </script>
 
+    <script>
+            async function postComment(event) {
+            event.preventDefault(); // Previne o envio padrão do formulário
+
+            var url = window.location.href;
+            var searchParams = new URLSearchParams(new URL(url).search);
+            var id = searchParams.get('id');
+
+            const comment = document.getElementById('comment').value;
+            const userId = sessionStorage.getItem('UserId');
+            const anime = id; // Usa o ID obtido da URL
+
+            const data = {
+                content: comment,
+                user: userId, // Certifique-se de que este é o nome correto do campo
+                animeId: anime
+            };
+
+            if (userId !== null || 0) { // Verifica se userId não é nulo ou vazio
+                try {
+                    const response = await fetch('http://localhost:3001/comment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+                    alert('Comentário feito com sucesso!');
+                    console.log(result);
+                } catch (error) {
+                    console.error('Erro:', error);
+                    alert('Erro ao enviar o comentário');
+                }
+            } else {
+                alert('Por favor faça login antes de comentar! :)');
+            }
+    }
+    </script>
 
 </body>
 </html>

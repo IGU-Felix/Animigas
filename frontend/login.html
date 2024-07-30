@@ -118,7 +118,6 @@
                             <div class="dropdown-content">
                                 <a id="entrar" class="login" href="login.html">Entrar</a>
                                 <a id="signup" href="signup.html">Cadastrar</a>
-                                <a id="logout-link" style="display: none;">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -157,12 +156,12 @@
                         <h3>Entrar</h3>
                         <form onsubmit="login(event)">
                             <div class="input__item">
-                                <input type="text" placeholder="Email" id="email">
+                                <input type="text" placeholder="Email" id="email" required>
                                 <span class="icon_mail"></span>
                             </div>
 
                             <div class="input__item">
-                                <input type="password" placeholder="Senha" id="password">
+                                <input type="password" placeholder="Senha" id="password" required>
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Entre Agora</button>

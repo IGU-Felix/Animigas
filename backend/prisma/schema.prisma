@@ -22,9 +22,9 @@ model Comment {
   commentId    Int        @id @default(autoincrement())
   content      String     @db.VarChar(255)
   date         DateTime   @default(now())
-  animeId      String?
+  animeId      Int?
   userId       Int        @map("user_id")
-  idUser       Signup     @relation(fields: [userId], references: [id])
+  user         Signup     @relation(fields: [userId], references: [id])
  
   @@map("comment")
 }

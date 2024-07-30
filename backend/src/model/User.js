@@ -18,3 +18,9 @@ export const findUserByEmail = async (email) => {
       },
     });
 };
+
+export const findUserById = async (id) => {
+  return prisma.signup.findUnique({
+    where: { id: Number(id) } // Certifique-se de que o ID é um número
+  });
+}
