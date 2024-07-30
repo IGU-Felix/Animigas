@@ -57,6 +57,7 @@
                     },
                     body: JSON.stringify(data)
                 });
+                const result = await response.json();
 
                 if (!response.ok) {
                     const errorData = await response.json();
@@ -64,13 +65,12 @@
                     return false;
                 }
 
-                const result = await response.json();
-                console.log(result);
-                if(result.adm == 0){
+                if(result.userId !== null || 0){
                     localStorage.setItem('UserId', result.userId);
                     console.log(result.userId);
-                    window.location.href = './index.html';
+                    window.location.href='index.html';
                 }
+             
             } catch (error) {
                 console.error('Erro:', error);
                 alert('Erro ao realizar o login');
