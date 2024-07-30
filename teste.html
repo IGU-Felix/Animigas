@@ -328,3 +328,49 @@
                     alert('Erro ao cadastrar o usuário');
                 }
             }
+
+
+
+
+
+
+
+            async function login(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+    
+                // Obtendo os valores dos campos do formulário
+                const email = document.getElementById('email').value;
+                const senha = document.getElementById('password').value;
+                const data = {
+                    email: email,
+                    password_hash: senha,
+                    adm: false
+                };
+    
+                try {
+                    const response = await fetch('http://localhost:3001/signin', {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        alert(`Erro: E-mail ou senha incorretos`);
+                        return false;
+                    }
+    
+                    const result = await response.json();
+                    console.log(result);
+                    if(result.adm == 0){
+                        localStorage.setItem('UserId',result.userId);
+                        console.log(result.userId);
+                        window.open('index.html');
+                    }
+                } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao realizar o login');
+                }
+            }
