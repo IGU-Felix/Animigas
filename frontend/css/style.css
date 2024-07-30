@@ -38,13 +38,13 @@
     display: none;
     position: absolute;
     background-color: #728fbe;
+	text-align: left;
 }
 
 .dropdown-content a {
     color: rgb(255, 255, 255);
     padding: 6px 8px;
     text-decoration: none;
-    display: block;
 }
 
 .dropdown-content a:hover {

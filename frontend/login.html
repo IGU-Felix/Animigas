@@ -66,7 +66,7 @@
                 }
 
                 if(result.userId !== null || 0){
-                    localStorage.setItem('UserId', result.userId);
+                    sessionStorage.setItem('UserId', result.userId);
                     console.log(result.userId);
                     window.location.href='index.html';
                 }
@@ -76,33 +76,6 @@
                 alert('Erro ao realizar o login');
             }
         }
-
-        function logout() {
-            localStorage.removeItem('UserId');
-            window.location.href = 'index.html';
-        }
-
-        function checkLogin() {
-            const userId = localStorage.getItem('UserId');
-            const loginLink = document.querySelector('entrar');
-            const signupLink = document.querySelector('signup');
-            const logoutLink = document.getElementById('logout-link');
-
-            if (userId) {
-                if (loginLink) loginLink.style.display = 'none';
-                if (signupLink) signupLink.style.display = 'none';
-                if (logoutLink) {
-                    logoutLink.style.display = 'block';
-                    logoutLink.addEventListener('click', logout);
-                }
-            } else {
-                if (loginLink) loginLink.style.display = 'block';
-                if (signupLink) signupLink.style.display = 'block';
-                if (logoutLink) logoutLink.style.display = 'none';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', checkLogin);
     </script>
 
 </head>
