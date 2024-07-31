@@ -93,7 +93,8 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg" data-setbg="">
-                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                            <div class="comment"><i class="fa fa-star"></i> <span
+                                class="comments-count"></span></div>
                             <div class="view"><i class="fa fa-star nota"></i></div>
                         </div>
                     </div>
@@ -118,7 +119,6 @@
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
                                             <li class="score"></li>
-                                            <li class="resenhas"><span>Resenhas:</span> 6</li>
                                             <li class="ep"></li>
                                             <li class="duracao"></li>
                                             <li class="views"></li>
@@ -158,7 +158,7 @@
                             <div>
                                 <textarea id="comment" placeholder="Comente" required></textarea>
                             </div>
-                            <button type="submit" class="site-btn">Review</button>
+                            <button id="review-button" type="submit" class="site-btn">Review</button>
                         </form>
                     </div>
                 </div>
@@ -294,8 +294,12 @@
                 var animeViews = animeItem.querySelector('.views')
                 animeViews.innerHTML = `<span>Membros:</span> ${anime.members}`
 
+                var commentsCount = animeItem.querySelector('.comments-count');
+                commentsCount.innerHTML = " " + anime.score;
+
                 var animeWatch = animeItem.querySelector('.watch-btn')
                 animeWatch.setAttribute('href', anime.trailer.url)
+                animeWatch.setAttribute('target', '_blank');
 
                 var animeScore1 = animeItem.querySelector('.nota')
                 animeScore1.innerHTML = " Rank: " + anime.rank
@@ -457,6 +461,20 @@
             console.error('Error fetching comment:', error);
         });
     })
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var commentInput = document.getElementById('comment');
+            var reviewButton = document.getElementById('review-button');
+
+            commentInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Evita o comportamento padrão do Enter (submissão do formulário, por exemplo)
+                    reviewButton.click();   // Simula o clique no botão "Search"
+                }
+            });
+        });
     </script>
 
 </body>
