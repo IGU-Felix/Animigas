@@ -140,18 +140,14 @@
                         <div class="section-title">
                             <h5>Reviews</h5>
                         </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
+                        <div class="anime__review__item" id="anime__review__item">
+                            <!-- <div class="anime__review__item__pic">
                                 <img src="img/anime/review-1.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>karinaamaral - <span>29 julho 2022</span></h6>
-                                <p>Um dos animes mais subestimados!!
-                                    Vou começar pelo único ponto negativo do anime: A animação não é muito boa.
-                                    No entanto, você logo acostuma. Agora dito isso, vou falar porque vale a pena
-                                    assistir
-                                    a essa obra.</p>
-                            </div>
+                            </div> -->
+                            <!-- <div class="anime__review__item__text" id="anime__review__item__text">
+                                <h6 id="user"><span id="date"></span></h6>
+                                <p id="content"></p>
+                            </div> -->
                         </div>
                     </div>
                     <div class="anime__details__form">
@@ -391,6 +387,51 @@
                 alert('Por favor faça login antes de comentar! :)');
             }
     }
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        var url = window.location.href;
+        var searchParams = new URLSearchParams(new URL(url).search);
+        var id = searchParams.get('id');
+        const anime = Number(id); // Usa o ID obtido da URL
+
+        fetch(`http://localhost:3001/lookcomment/${anime}`)
+        .then(response => response.json())
+        .then(data => {
+            var commentListElement = document.getElementById('anime__review__item');
+
+            data.comment.forEach( comment => {
+                var commentPic = document.createElement('div');
+                commentPic.classList.add('anime__review__item__pic');
+                commentListElement.appendChild(commentPic); 
+
+                var commentImg = document.createElement('img');
+                commentImg.src = "img/anime/review-1.jpg"
+                commentPic.appendChild(commentImg)
+
+                var commentBox = document.createElement('div')
+                commentBox.classList.add('anime__review__item__text')
+                commentListElement.appendChild(commentBox)
+
+                var commentName = document.createElement('h6');
+                commentName.innerHTML = comment.userId
+                commentBox.appendChild(commentName); 
+
+                var commentDate = document.createElement('span');
+                commentDate.innerHTML = comment.date.length > 10 ? comment.date.substring(0, 10) : comment.date 
+                commentName.appendChild(commentDate); 
+
+                var commentContent = document.createElement('p');
+                commentContent.innerHTML = comment.content
+                commentBox.appendChild(commentContent); 
+            });
+            console.log(data)
+        })
+        .catch(error => {
+            console.error('Error fetching comment:', error);
+        });
+    })
     </script>
 
 </body>

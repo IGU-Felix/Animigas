@@ -1,34 +1,15 @@
-import { createComment } from "../model/Comment.js";
-import { findUserById } from "../model/User.js";
+import { findCommentById } from "../model/Comment.js";
 
-// export const newComment = async (req, res) => {
-//   try {
-//     const data = req.body;
-
-//     // Verifique se o usuário existe
-//     const user = await findUserById(data.userId);
-//     if (!user) {
-//       return res.status(404).json({ error: "User not found" });
-//     }
-
-//     // Crie o comentário
-//     await createComment({
-//       data: {
-//         content: data.content,
-//         animeId: data.animeId, // Use o nome correto da propriedade aqui
-//         user: {
-//           connect: { id: data.userId } // Use connect para associar o comentário ao usuário existente
-//         }
-//       }
-//     });
-
-//     res.status(201).json("Comentário enviado!");
-//   } catch (error) {
-//     res.status(500).json({ error: "Failed to create comment", message: error.message });
-//   }
-// };
-
-
+export const getComments = async (req, res) => {
+    try {
+      const comment = await findCommentById(req.params.animeId);
+      res.status(200).json({ comment });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "Failed to get comments", message: error.message });
+    }
+  };
 
 export const newComment = async (req, res) => {
   const { content, userId, animeId } = req.body;
