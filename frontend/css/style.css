@@ -22,6 +22,26 @@
 /* Template default CSS
 /*----------------------------------------*/
 
+.nickname {
+	color: #fff;
+	margin-right: 45px;
+	margin-top: -23px;
+}
+
+.nickname2 {
+	color: #fff;
+	margin-left: 54px;
+	margin-top: -38px;
+}
+
+.nickname span {
+	color: rgb(223, 165, 41);
+}
+
+.nickname2 span {
+	color: rgb(223, 165, 41);
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -1201,6 +1221,7 @@ ol {
 	background: #1d1e39;
 	padding: 18px 30px 16px 20px;
 	border-radius: 10px;
+	margin-bottom: 25px;
 }
 
 .anime__review__item__text h6 {
@@ -1220,7 +1241,7 @@ ol {
 	margin-bottom: 0;
 }
 
-.anime__details__form form input {
+.anime__details__form form textarea {
 	width: 100%;
 	font-size: 15px;
 	color: #000000;

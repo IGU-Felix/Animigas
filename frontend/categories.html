@@ -44,7 +44,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
@@ -55,13 +55,13 @@
                         </nav>
                     </div>
                 </div>
-                <div class="col-lg-2">
-                    <div class="header__right">
+                <div class="col-lg-3">
+                    <div id= "header__right" class="header__right">
                         <div class="dropdown">
                             <button class="dropbtn"><span class="icon_profile"></span></button>
                             <div class="dropdown-content">
-                                <a class="login" href="login.html">Entrar</a>
-                                <a href="signup.html">Cadastrar</a>
+                                <a id="entrar" class="login" href="login.html">Entrar</a>
+                                <a id="signup" href="signup.html">Cadastrar</a>
                                 <a onclick="logout(event)" id="logout-link" style="display: none;">Logout</a>
                             </div>
                         </div>
@@ -161,9 +161,7 @@
                     <div class="footer__nav">
                         <ul>
                             <li class="active"><a href="./index.html">Página inicial</a></li>
-                            <li><a href="./categories.html">Categorias</a></li>
-                            <li><a href="./blog.html">Nosso Blog</a></li>
-
+                            <li><a href="./categories.html">Animes</a></li>
                         </ul>
                     </div>
                 </div>
@@ -171,17 +169,6 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
-    <!-- Search model Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search model end -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -422,11 +409,11 @@
 <script>    
     function checkLogin() {
             const userId = localStorage.getItem('userId');
-            const loginLink = document.querySelector('entrar');
-            const signupLink = document.querySelector('signup');
+            const loginLink = document.getElementById('entrar');
+            const signupLink = document.getElementById('signup');
             const logoutLink = document.getElementById('logout-link');
 
-            if (userId !== null || 0) {
+            if (userId) {
                 if (loginLink) {
                     loginLink.style.display = 'none';
                 }
@@ -447,9 +434,46 @@
 
         function logout() {
             localStorage.removeItem('userId');
+            localStorage.removeItem('user')
             window.location.href = 'index.html';
         }
 
+        function nickname() {
+            const username = localStorage.getItem('user');
+
+            if (username) {
+                var header = document.getElementById('header__right');
+
+                // Remove qualquer elemento com a classe 'nickname' existente para evitar duplicação
+                var existingNickname = document.querySelector('.nickname');
+                if (existingNickname) {
+                    existingNickname.remove();
+                }
+
+                var namenick = document.createElement('h6');
+                namenick.innerHTML = `Bem-vindo(a) - <span>${username}</span>`;
+                namenick.classList.add('nickname');
+                header.appendChild(namenick);
+            }
+}
+
+// Execute a função após o carregamento do DOM
+document.addEventListener('DOMContentLoaded', nickname);
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var searchInput = document.getElementById('search-input');
+        var searchButton = document.getElementById('search-button');
+
+        searchInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita o comportamento padrão do Enter (submissão do formulário, por exemplo)
+                searchButton.click();   // Simula o clique no botão "Search"
+            }
+        });
+    });
 </script>
 
 </body>

@@ -12,7 +12,7 @@ export const getComments = async (req, res) => {
   };
 
 export const newComment = async (req, res) => {
-  const { content, userId, animeId } = req.body;
+  const { content, userId, animeId, username } = req.body;
 
   if (!userId) {
       return res.status(400).json({ error: 'userId is required' });
@@ -33,7 +33,8 @@ export const newComment = async (req, res) => {
           data: {
               content: content,
               userId: parseInt(userId),
-              animeId: parseInt(animeId)
+              animeId: parseInt(animeId),
+              username: username
           }
       });
 

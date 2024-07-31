@@ -23,6 +23,7 @@ model Comment {
   content      String     @db.VarChar(255)
   date         DateTime   @default(now())
   animeId      Int
+  username     String     @db.VarChar(50)
   userId       Int        @map("user_id")
   user         Signup     @relation(fields: [userId], references: [id])
  

@@ -42,7 +42,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
@@ -52,13 +52,13 @@
                         </nav>
                     </div>
                 </div>
-                <div class="col-lg-2">
-                    <div class="header__right">
+                <div class="col-lg-3">
+                    <div id= "header__right" class="header__right">
                         <div class="dropdown">
                             <button class="dropbtn"><span class="icon_profile"></span></button>
                             <div class="dropdown-content">
-                                <a class="login" href="login.html">Entrar</a>
-                                <a href="signup.html">Cadastrar</a>
+                                <a id="entrar" class="login" href="login.html">Entrar</a>
+                                <a id="signup" href="signup.html">Cadastrar</a>
                                 <a onclick="logout(event)" id="logout-link" style="display: none;">Logout</a>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                         </div>
                         <form onsubmit="postComment(event)">
                             <div>
-                                <input id="comment" placeholder="Comente" required></input>
+                                <textarea id="comment" placeholder="Comente" required></textarea>
                             </div>
                             <button type="submit" class="site-btn">Review</button>
                         </form>
@@ -315,38 +315,61 @@
         });
     </script>
 
-    <script>    
-        function checkLogin() {
-                const userId = localStorage.getItem('userId');
-                const loginLink = document.querySelector('entrar');
-                const signupLink = document.querySelector('signup');
-                const logoutLink = document.getElementById('logout-link');
+<script>    
+    function checkLogin() {
+            const userId = localStorage.getItem('userId');
+            const loginLink = document.getElementById('entrar');
+            const signupLink = document.getElementById('signup');
+            const logoutLink = document.getElementById('logout-link');
 
-                if (userId !== null || 0) {
-                    if (loginLink) {
-                        loginLink.style.display = 'none';
-                    }
-                    if (signupLink) {
-                        signupLink.style.display = 'none';
-                    }
-                    if (logoutLink) {
-                        logoutLink.style.display = 'block';
-                    }
-                } else {
-                    if (loginLink) loginLink.style.display = 'block';
-                    if (signupLink) signupLink.style.display = 'block';
-                    if (logoutLink) logoutLink.style.display = 'none';
+            if (userId) {
+                if (loginLink) {
+                    loginLink.style.display = 'none';
                 }
+                if (signupLink) {
+                    signupLink.style.display = 'none';
+                }
+                if (logoutLink) {
+                    logoutLink.style.display = 'block';
+                }
+            } else {
+                if (loginLink) loginLink.style.display = 'block';
+                if (signupLink) signupLink.style.display = 'block';
+                if (logoutLink) logoutLink.style.display = 'none';
             }
+        }
 
-            document.addEventListener('DOMContentLoaded', checkLogin);
+        document.addEventListener('DOMContentLoaded', checkLogin);
 
-            function logout() {
-                localStorage.removeItem('userId');
-                window.location.href = 'index.html';
+        function logout() {
+            localStorage.removeItem('userId');
+            localStorage.removeItem('user')
+            window.location.href = 'index.html';
+        }
+
+        function nickname() {
+            const username = localStorage.getItem('user');
+
+            if (username) {
+                var header = document.getElementById('header__right');
+
+                // Remove qualquer elemento com a classe 'nickname' existente para evitar duplicação
+                var existingNickname = document.querySelector('.nickname');
+                if (existingNickname) {
+                    existingNickname.remove();
+                }
+
+                var namenick = document.createElement('h6');
+                namenick.innerHTML = `Bem-vindo(a) - <span>${username}</span>`;
+                namenick.classList.add('nickname');
+                header.appendChild(namenick);
             }
+        }
 
-    </script>
+    // Execute a função após o carregamento do DOM
+        document.addEventListener('DOMContentLoaded', nickname);
+
+</script>
 
     <script>
             async function postComment(event) {
@@ -358,15 +381,17 @@
 
             const comment = document.getElementById('comment').value;
             const userId = localStorage.getItem('userId');
+            const username = localStorage.getItem('user')
             const anime = Number(id); // Usa o ID obtido da URL
 
             const data = {
                 content: comment,
                 userId: userId, // Certifique-se de que este é o nome correto do campo
-                animeId: anime
+                animeId: anime,
+                username: username
             };
 
-            if (userId !== null || 0) { // Verifica se userId não é nulo ou vazio
+            if (userId) { // Verifica se userId não é nulo ou vazio
                 try {
                     const response = await fetch('http://localhost:3001/comment', {
                         method: 'POST',
@@ -378,7 +403,7 @@
 
                     const result = await response.json();
                     alert('Comentário feito com sucesso!');
-                    console.log(result);
+                    window.location.reload()
                 } catch (error) {
                     console.error('Erro:', error);
                     alert('Erro ao enviar o comentário');
@@ -415,7 +440,7 @@
                 commentListElement.appendChild(commentBox)
 
                 var commentName = document.createElement('h6');
-                commentName.innerHTML = comment.userId
+                commentName.innerHTML = comment.username + " - "
                 commentBox.appendChild(commentName); 
 
                 var commentDate = document.createElement('span');

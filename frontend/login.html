@@ -68,13 +68,23 @@
                 if(result.id !== null || 0){
                     localStorage.setItem('userId', result.id);
                     window.location.href='index.html';
-                }
-             
+                } 
+                localStorage.setItem('user', result.name)
             } catch (error) {
                 console.error('Erro:', error);
                 alert('Erro ao realizar o login');
             }
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var setBgElements = document.querySelectorAll('.set-bg');
+            setBgElements.forEach(function(element) {
+                var bg = element.getAttribute('data-setbg');
+                element.style.backgroundImage = 'url(' + bg + ')';
+            });
+        });
     </script>
 
 </head>
@@ -196,7 +206,7 @@
                     <div class="footer__nav">
                         <ul>
                             <li class="active"><a href="./index.html">Início</a></li>
-                            <li><a href="./categories.html">Categorias</a></li>
+                            <li><a href="./categories.html">Animes</a></li>
                         </ul>
                     </div>
                 </div>

@@ -76,7 +76,7 @@ export const cadastro = async (req, res) => {
         return;
       }
       // Retornar o status
-      res.status(200).json({ id: user.id });
+      res.status(200).json({ id: user.id, name: user.name});
     } catch (error) {
       res.status(500).json({ error: "Failed to log in", message: error.message });
     }
